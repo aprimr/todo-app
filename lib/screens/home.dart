@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/theme/theme.dart';
 import 'package:todo_app/theme/theme_provider.dart';
 
 class Home extends StatelessWidget {
@@ -41,16 +43,20 @@ class Header extends StatelessWidget {
                     listen: false,
                   ).toggleTheme();
                 },
-                icon: Icon(
-                  Icons.sunny,
+                icon: HugeIcon(
+                  icon: Theme.of(context).brightness == Brightness.dark
+                      ? HugeIcons.strokeRoundedSun03
+                      : HugeIcons.strokeRoundedMoon02,
                   color: Theme.of(context).colorScheme.secondary,
+                  strokeWidth: 2,
                 ),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(
-                  Icons.search,
+                icon: HugeIcon(
+                  icon: HugeIcons.strokeRoundedSearch01,
                   color: Theme.of(context).colorScheme.secondary,
+                  strokeWidth: 2,
                 ),
               ),
             ],
