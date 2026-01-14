@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/theme/theme_provider.dart';
 
 class Home extends StatelessWidget {
   final String title;
@@ -8,13 +10,17 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: Column(children: [Header()])),
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: SafeArea(
+        child: Column(children: [Header(title: title)]),
+      ),
     );
   }
 }
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final String title;
+  const Header({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +35,28 @@ class Header extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.sunny, color: Colors.white),
+                onPressed: () {
+                  Provider.of<ThemeProvider>(
+                    context,
+                    listen: false,
+                  ).toggleTheme();
+                },
+                icon: Icon(
+                  Icons.sunny,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.search, color: Colors.white),
+                icon: Icon(
+                  Icons.search,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
               ),
             ],
           ),
           Text(
-            "Taskzz",
+            title,
             style: TextStyle(
               fontSize: 34,
               fontFamily: GoogleFonts.poppins().fontFamily,
