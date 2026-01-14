@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/screens/home.dart';
 
 void main() {
   runApp(const TodoApp());
@@ -9,10 +10,12 @@ class TodoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String title = "Todo App";
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: title,
       theme: ThemeData(brightness: Brightness.dark),
-      home: Text("data"),
+      debugShowCheckedModeBanner: false,
+      home: Home(title: title),
     );
   }
 }
