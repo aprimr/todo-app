@@ -8,6 +8,7 @@ ThemeData lightTheme = ThemeData(
     secondary: Colors.grey.shade800,
     tertiary: Colors.grey.shade500,
     inversePrimary: Colors.grey.shade100,
+    error: Colors.red,
   ),
 );
 
@@ -19,5 +20,6 @@ ThemeData darkTheme = ThemeData(
     secondary: Colors.grey.shade300,
     tertiary: Colors.grey.shade500,
     inversePrimary: Colors.grey.shade900,
+    error: const Color(0xFFFF3434),
   ),
 );

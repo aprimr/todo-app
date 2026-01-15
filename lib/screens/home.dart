@@ -17,10 +17,42 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     void addTask(String value) {
+      if (value.isEmpty) {
+        final snackBar = SnackBar(
+          content: Text(
+            'Please enter a task.',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              fontFamily: GoogleFonts.poppins().fontFamily,
+            ),
+          ),
+          behavior: SnackBarBehavior.floating,
+          shape: const StadiumBorder(),
+          showCloseIcon: true,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return;
+      } else if (value.length >= 50) {
+        final snackBar = SnackBar(
+          content: Text(
+            'Task must have at most 50 characters.',
+            style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              fontFamily: GoogleFonts.poppins().fontFamily,
+            ),
+          ),
+          behavior: SnackBarBehavior.floating,
+          shape: const StadiumBorder(),
+          showCloseIcon: true,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return;
+      }
       setState(() {
         tasks.add(value);
       });
-      print(tasks);
     }
 
     return Scaffold(
@@ -112,21 +144,37 @@ class TodoBody extends StatelessWidget {
         child: ListView.builder(
           itemCount: tasks.length,
           itemBuilder: (context, index) {
-            return Card(
-              elevation: 0.5,
-              color: Theme.of(context).colorScheme.inversePrimary,
-              child: ListTile(
-                leading: HugeIcon(
-                  icon: HugeIcons.strokeRoundedNote01,
-                  color: Theme.of(context).colorScheme.secondary,
+            return Dismissible(
+              key: Key(tasks[index]),
+              direction: DismissDirection.endToStart,
+              background: Container(
+                margin: EdgeInsets.symmetric(horizontal: 50),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    HugeIcon(
+                      icon: HugeIcons.strokeRoundedDelete02,
+                      size: 26,
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ],
                 ),
-                title: Text(
-                  tasks[index],
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: GoogleFonts.poppins().fontFamily,
+              ),
+              child: Card(
+                elevation: 0.5,
+                color: Theme.of(context).colorScheme.inversePrimary,
+                child: ListTile(
+                  leading: HugeIcon(
+                    icon: HugeIcons.strokeRoundedNote01,
                     color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  title: Text(
+                    tasks[index],
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: GoogleFonts.poppins().fontFamily,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
                 ),
               ),
@@ -184,6 +232,12 @@ class _AddTodoState extends State<AddTodo> {
                   borderSide: BorderSide(
                     width: 1.5,
                     color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 2,
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
                 ),
               ),
