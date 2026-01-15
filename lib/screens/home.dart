@@ -13,10 +13,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<String> tasks = [];
   @override
   Widget build(BuildContext context) {
-    List<String> tasks = [];
-
     void addTask(String value) {
       setState(() {
         tasks.add(value);
@@ -30,7 +29,7 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             Header(title: widget.title),
-            TodoBody(),
+            TodoBody(tasks: tasks),
             AddTodo(addTask: addTask),
           ],
         ),
@@ -102,11 +101,40 @@ class Header extends StatelessWidget {
 }
 
 class TodoBody extends StatelessWidget {
-  const TodoBody({super.key});
-
+  final List<String> tasks;
+  const TodoBody({super.key, required this.tasks});
   @override
   Widget build(context) {
-    return Expanded(flex: 1, child: Container(color: Colors.blue));
+    return Expanded(
+      flex: 1,
+      child: Container(
+        padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 5),
+        child: ListView.builder(
+          itemCount: tasks.length,
+          itemBuilder: (context, index) {
+            return Card(
+              elevation: 0.5,
+              color: Theme.of(context).colorScheme.inversePrimary,
+              child: ListTile(
+                leading: HugeIcon(
+                  icon: HugeIcons.strokeRoundedNote01,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                title: Text(
+                  tasks[index],
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: GoogleFonts.poppins().fontFamily,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 }
 
