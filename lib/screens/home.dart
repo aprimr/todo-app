@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/theme/theme.dart';
 import 'package:todo_app/theme/theme_provider.dart';
 
 class Home extends StatelessWidget {
@@ -51,6 +50,12 @@ class Header extends StatelessWidget {
                   strokeWidth: 2,
                 ),
               ),
+              HugeIcon(
+                size: 32,
+                strokeWidth: 2,
+                icon: HugeIcons.strokeRoundedNote,
+                color: Theme.of(context).colorScheme.primary,
+              ),
               IconButton(
                 onPressed: () {},
                 icon: HugeIcon(
@@ -61,12 +66,13 @@ class Header extends StatelessWidget {
               ),
             ],
           ),
-          Text(
+          Text( 
             title,
             style: TextStyle(
-              fontSize: 34,
-              fontFamily: GoogleFonts.poppins().fontFamily,
+              fontSize: 32,
               fontWeight: FontWeight.w700,
+              letterSpacing: 1.5,
+              fontFamily: GoogleFonts.outfit().fontFamily,
             ),
           ),
         ],
