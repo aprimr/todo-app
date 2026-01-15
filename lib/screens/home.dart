@@ -4,20 +4,34 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/theme/theme_provider.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   final String title;
   const Home({super.key, required this.title});
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
   Widget build(BuildContext context) {
+    List<String> tasks = [];
+
+    void addTask(String value) {
+      setState(() {
+        tasks.add(value);
+      });
+      print(tasks);
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
-            Header(title: title),
+            Header(title: widget.title),
             TodoBody(),
-            AddTodo(),
+            AddTodo(addTask: addTask),
           ],
         ),
       ),
@@ -96,9 +110,16 @@ class TodoBody extends StatelessWidget {
   }
 }
 
-class AddTodo extends StatelessWidget {
-  const AddTodo({super.key});
+class AddTodo extends StatefulWidget {
+  final Function addTask;
+  const AddTodo({super.key, required this.addTask});
 
+  @override
+  State<AddTodo> createState() => _AddTodoState();
+}
+
+class _AddTodoState extends State<AddTodo> {
+  final TextEditingController _taskInputController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -110,6 +131,7 @@ class AddTodo extends StatelessWidget {
           Expanded(
             flex: 7,
             child: TextField(
+              controller: _taskInputController,
               decoration: InputDecoration(
                 hint: Text(
                   "Enter a task",
@@ -120,9 +142,12 @@ class AddTodo extends StatelessWidget {
                   ),
                 ),
                 suffixIcon: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.addTask(_taskInputController.text.trim());
+                    _taskInputController.text = "";
+                  },
                   icon: HugeIcon(
-                    icon: HugeIcons.strokeRoundedAddCircle,
+                    icon: HugeIcons.strokeRoundedNoteAdd,
                     strokeWidth: 2,
                     color: Theme.of(context).colorScheme.secondary,
                   ),
