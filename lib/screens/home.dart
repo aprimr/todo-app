@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
       if (value.isEmpty) {
         final snackBar = SnackBar(
           content: Text(
-            'Please enter a task.',
+            'Please enter a task',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
       } else if (value.length >= 50) {
         final snackBar = SnackBar(
           content: Text(
-            'Task must have at most 50 characters.',
+            'Task must have at most 50 characters',
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
@@ -55,13 +55,33 @@ class _HomeState extends State<Home> {
       });
     }
 
+    void removeTask(int index) {
+      setState(() {
+        tasks.removeAt(index);
+      });
+      final snackBar = SnackBar(
+        content: Text(
+          'Task deleted',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            fontFamily: GoogleFonts.poppins().fontFamily,
+          ),
+        ),
+        behavior: SnackBarBehavior.floating,
+        shape: const StadiumBorder(),
+        showCloseIcon: true,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
             Header(title: widget.title),
-            TodoBody(tasks: tasks),
+            TodoBody(tasks: tasks, removeTask: removeTask),
             AddTodo(addTask: addTask),
           ],
         ),
@@ -134,53 +154,79 @@ class Header extends StatelessWidget {
 
 class TodoBody extends StatelessWidget {
   final List<String> tasks;
-  const TodoBody({super.key, required this.tasks});
+  final Function removeTask;
+  const TodoBody({super.key, required this.tasks, required this.removeTask});
   @override
   Widget build(context) {
     return Expanded(
       flex: 1,
       child: Container(
         padding: EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 5),
-        child: ListView.builder(
-          itemCount: tasks.length,
-          itemBuilder: (context, index) {
-            return Dismissible(
-              key: Key(tasks[index]),
-              direction: DismissDirection.endToStart,
-              background: Container(
-                margin: EdgeInsets.symmetric(horizontal: 50),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    HugeIcon(
-                      icon: HugeIcons.strokeRoundedDelete02,
-                      size: 26,
-                      color: Theme.of(context).colorScheme.error,
+        child: tasks.isNotEmpty
+            ? ListView.builder(
+                itemCount: tasks.length,
+                itemBuilder: (context, index) {
+                  return Dismissible(
+                    key: Key(tasks[index]),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      removeTask(index);
+                    },
+                    background: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          HugeIcon(
+                            icon: HugeIcons.strokeRoundedDelete02,
+                            size: 26,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-              child: Card(
-                elevation: 0.5,
-                color: Theme.of(context).colorScheme.inversePrimary,
-                child: ListTile(
-                  leading: HugeIcon(
-                    icon: HugeIcons.strokeRoundedNote01,
-                    color: Theme.of(context).colorScheme.secondary,
+                    child: Card(
+                      elevation: 0.5,
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      child: ListTile(
+                        leading: HugeIcon(
+                          icon: HugeIcons.strokeRoundedNote01,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                        title: Text(
+                          tasks[index],
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: GoogleFonts.poppins().fontFamily,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              )
+            : Column(
+                children: [
+                  SizedBox(height: 80),
+                  HugeIcon(
+                    size: 80,
+                    strokeWidth: 0.9,
+                    color: Theme.of(context).colorScheme.tertiary,
+                    icon: HugeIcons.strokeRoundedLicenseNo,
                   ),
-                  title: Text(
-                    tasks[index],
+                  SizedBox(height: 8),
+                  Text(
+                    "No tasks added",
                     style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: GoogleFonts.poppins().fontFamily,
-                      color: Theme.of(context).colorScheme.secondary,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: GoogleFonts.outfit().fontFamily,
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                   ),
-                ),
+                ],
               ),
-            );
-          },
-        ),
       ),
     );
   }
