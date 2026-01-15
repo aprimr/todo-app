@@ -13,7 +13,13 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
-        child: Column(children: [Header(title: title)]),
+        child: Column(
+          children: [
+            Header(title: title),
+            TodoBody(),
+            AddTodo(),
+          ],
+        ),
       ),
     );
   }
@@ -66,13 +72,68 @@ class Header extends StatelessWidget {
               ),
             ],
           ),
-          Text( 
+          Text(
             title,
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.w700,
               letterSpacing: 1.5,
               fontFamily: GoogleFonts.outfit().fontFamily,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TodoBody extends StatelessWidget {
+  const TodoBody({super.key});
+
+  @override
+  Widget build(context) {
+    return Expanded(flex: 1, child: Container(color: Colors.blue));
+  }
+}
+
+class AddTodo extends StatelessWidget {
+  const AddTodo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 7,
+            child: TextField(
+              decoration: InputDecoration(
+                hint: Text(
+                  "Enter a task",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontFamily: GoogleFonts.poppins().fontFamily,
+                  ),
+                ),
+                suffixIcon: IconButton(
+                  onPressed: () {},
+                  icon: HugeIcon(
+                    icon: HugeIcons.strokeRoundedAddCircle,
+                    strokeWidth: 2,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    width: 1.5,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
+                ),
+              ),
             ),
           ),
         ],

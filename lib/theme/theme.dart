@@ -6,6 +6,7 @@ ThemeData lightTheme = ThemeData(
     surface: Colors.white,
     primary: Colors.black,
     secondary: Colors.grey.shade800,
+    tertiary: Colors.grey.shade500,
   ),
 );
 
@@ -15,5 +16,6 @@ ThemeData darkTheme = ThemeData(
     surface: Colors.black,
     primary: Colors.white,
     secondary: Colors.grey.shade300,
+    tertiary: Colors.grey.shade500,
   ),
 );
