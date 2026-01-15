@@ -86,6 +86,7 @@ class _HomeState extends State<Home> {
           ],
         ),
       ),
+      drawer: Drawer(),
     );
   }
 }
@@ -104,7 +105,7 @@ class Header extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
                 onPressed: () {
@@ -121,30 +122,28 @@ class Header extends StatelessWidget {
                   strokeWidth: 2,
                 ),
               ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               HugeIcon(
                 size: 32,
                 strokeWidth: 2,
                 icon: HugeIcons.strokeRoundedNote,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              IconButton(
-                onPressed: () {},
-                icon: HugeIcon(
-                  icon: HugeIcons.strokeRoundedSearch01,
-                  color: Theme.of(context).colorScheme.secondary,
-                  strokeWidth: 2,
+              SizedBox(width: 6),
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.5,
+                  fontFamily: GoogleFonts.outfit().fontFamily,
                 ),
               ),
             ],
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.5,
-              fontFamily: GoogleFonts.outfit().fontFamily,
-            ),
           ),
         ],
       ),
