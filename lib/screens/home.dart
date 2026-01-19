@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:provider/provider.dart';
-import 'package:todo_app/theme/theme_provider.dart';
+import 'package:todo_app/widgets/ui/toggle_theme_button.dart';
 
 class Home extends StatefulWidget {
   final String title;
@@ -106,23 +105,7 @@ class Header extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Provider.of<ThemeProvider>(
-                    context,
-                    listen: false,
-                  ).toggleTheme();
-                },
-                icon: HugeIcon(
-                  icon: Theme.of(context).brightness == Brightness.dark
-                      ? HugeIcons.strokeRoundedSun03
-                      : HugeIcons.strokeRoundedMoon02,
-                  color: Theme.of(context).colorScheme.secondary,
-                  strokeWidth: 2,
-                ),
-              ),
-            ],
+            children: [ToggleThemeButton()],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

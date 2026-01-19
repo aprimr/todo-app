@@ -1,21 +1,29 @@
 import "package:flutter/material.dart";
-import "package:todo_app/theme/theme.dart";
+import "package:shared_preferences/shared_preferences.dart";
 
 class ThemeProvider with ChangeNotifier {
-  ThemeData _themeData = lightTheme;
+  bool _isDark = false;
 
-  ThemeData get themeData => _themeData;
+  ThemeProvider() {
+    _loadTheme();
+  }
 
-  set themeData(ThemeData themeData) {
-    _themeData = themeData;
+  bool get isDark => _isDark;
+
+  void toggleTheme() {
+    _isDark = !_isDark;
+    notifyListeners();
+    _saveTheme();
+  }
+
+  void _loadTheme() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    _isDark = prefs.getBool('isDarkTheme') ?? false;
     notifyListeners();
   }
 
-  void toggleTheme() {
-    if (_themeData == lightTheme) {
-      themeData = darkTheme;
-    } else {
-      themeData = lightTheme;
-    }
+  void _saveTheme() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isDarkTheme', _isDark);
   }
 }

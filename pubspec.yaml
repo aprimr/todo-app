@@ -37,6 +37,7 @@ dependencies:
   google_fonts: ^7.0.2
   provider: ^6.1.5+1
   hugeicons: ^1.1.5
+  shared_preferences: ^2.5.4
 
 dev_dependencies:
   flutter_test:

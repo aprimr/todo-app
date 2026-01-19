@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/screens/home.dart';
+import 'package:todo_app/theme/theme.dart';
 import 'package:todo_app/theme/theme_provider.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => ThemeProvider())],
       child: const TodoApp(),
     ),
   );
@@ -18,10 +20,14 @@ class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String title = "Taskzz";
+    final themeData = context.watch<ThemeProvider>();
+
     return MaterialApp(
       title: title,
       debugShowCheckedModeBanner: false,
-      theme: Provider.of<ThemeProvider>(context).themeData,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: themeData.isDark ? ThemeMode.dark : ThemeMode.light,
       home: Home(title: title),
     );
   }
