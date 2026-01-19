@@ -23,6 +23,13 @@ class TaskProvider extends ChangeNotifier {
     return (_tasks, _completed);
   }
 
+  // Toggle Task completed
+  void toggleCompleted(int index) {
+    _completed[index] = _completed[index] == "false" ? "true" : "false";
+    _saveTasks();
+    notifyListeners();
+  }
+
   // Delete All Tasks
   void deleteAllTasks() {
     _tasks.clear();
