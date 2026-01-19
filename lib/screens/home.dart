@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:todo_app/utils/routes.dart';
 import 'package:todo_app/widgets/banner_ads_widget.dart';
 import 'package:todo_app/widgets/ui/toggle_theme_button.dart';
 
@@ -43,7 +44,9 @@ class Header extends StatelessWidget {
             children: [
               ToggleThemeButton(),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.addTasksRoute);
+                },
                 icon: HugeIcon(
                   strokeWidth: 2,
                   icon: HugeIcons.strokeRoundedAddSquare,

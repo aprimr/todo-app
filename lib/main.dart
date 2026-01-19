@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/provider/task_provider.dart';
 import 'package:todo_app/screens/add_task.dart';
 import 'package:todo_app/screens/home.dart';
 import 'package:todo_app/theme/theme.dart';
@@ -13,7 +14,10 @@ void main() {
   MobileAds.instance.initialize();
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ThemeProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => TaskProvider()),
+      ],
       child: const TodoApp(),
     ),
   );
