@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class BannerAdsWidget extends StatefulWidget {
@@ -13,6 +14,7 @@ class _BannerAdsWidgetState extends State<BannerAdsWidget> {
   bool _isLoaded = false;
   // Ad Unit ID
   final String adUnitId = "ca-app-pub-3940256099942544/9214589741";
+  // final String adUnitId = "ca-app-pub-7096527730985352/3968476578";
 
   @override
   void initState() {
@@ -60,7 +62,19 @@ class _BannerAdsWidgetState extends State<BannerAdsWidget> {
         child: Center(child: AdWidget(ad: _bannerAd!)),
       );
     } else {
-      return SizedBox.shrink();
+      return SizedBox(
+        height: AdSize.banner.height.toDouble(),
+        width: double.infinity,
+        child: Center(
+          child: Text(
+            "Banner Ad Failed",
+            style: TextStyle(
+              fontFamily: GoogleFonts.poppins().fontFamily,
+              fontSize: 14,
+            ),
+          ),
+        ),
+      );
     }
   }
 }

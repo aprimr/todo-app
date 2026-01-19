@@ -16,12 +16,11 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             Header(title: title),
-            Expanded(flex: 1, child: Container(color: Colors.amber)),
+            Expanded(flex: 1, child: Container()),
             BannerAdsWidget(),
           ],
         ),
       ),
-      drawer: Drawer(),
     );
   }
 }
@@ -40,8 +39,18 @@ class Header extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [ToggleThemeButton()],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              ToggleThemeButton(),
+              IconButton(
+                onPressed: () {},
+                icon: HugeIcon(
+                  strokeWidth: 2,
+                  icon: HugeIcons.strokeRoundedAddSquare,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
