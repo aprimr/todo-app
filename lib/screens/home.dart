@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:todo_app/widgets/banner_ads_widget.dart';
 import 'package:todo_app/widgets/ui/toggle_theme_button.dart';
 
 class Home extends StatelessWidget {
@@ -12,7 +13,13 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
-        child: Column(children: [Header(title: title)]),
+        child: Column(
+          children: [
+            Header(title: title),
+            Expanded(flex: 1, child: Container(color: Colors.amber)),
+            BannerAdsWidget(),
+          ],
+        ),
       ),
       drawer: Drawer(),
     );
