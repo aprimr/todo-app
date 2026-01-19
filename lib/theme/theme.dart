@@ -8,7 +8,8 @@ ThemeData lightTheme = ThemeData(
     secondary: Colors.grey.shade800,
     tertiary: Colors.grey.shade500,
     inversePrimary: Colors.grey.shade100,
-    error: Colors.red,
+    error: Colors.redAccent.shade400,
+    outline: Colors.greenAccent.shade700,
   ),
 );
 
@@ -20,6 +21,7 @@ ThemeData darkTheme = ThemeData(
     secondary: Colors.grey.shade300,
     tertiary: Colors.grey.shade500,
     inversePrimary: Colors.grey.shade900,
-    error: const Color(0xFFFF3434),
+    error: Colors.redAccent.shade200,
+    outline: Colors.greenAccent.shade400,
   ),
 );

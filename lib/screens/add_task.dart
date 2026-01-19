@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/helper/snackbar.dart';
 import 'package:todo_app/provider/task_provider.dart';
 import 'package:todo_app/widgets/appbar_widget.dart';
 import 'package:todo_app/widgets/banner_ads_widget.dart';
@@ -29,6 +31,8 @@ class _AddTaskState extends State<AddTask> {
     if (isValid) {
       _formKey.currentState!.save();
       taskProvider.addTask(task);
+      _formKey.currentState!.reset();
+      showSnackBar(context, message: "Task added");
     } else {
       return;
     }
@@ -37,7 +41,17 @@ class _AddTaskState extends State<AddTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppbarWidget(title: "Add Task"),
+      appBar: AppbarWidget(
+        title: "Add Task",
+        actionIcon: HugeIcon(
+          icon: HugeIcons.strokeRoundedDelete03,
+          color: Theme.of(context).colorScheme.error,
+        ),
+        actionFunction: () {
+          taskProvider.deleteAllTasks();
+          showSnackBar(context, message: "Deleted All Tasks");
+        },
+      ),
       body: Column(
         children: [
           Expanded(
@@ -125,38 +139,24 @@ class _AddTaskState extends State<AddTask> {
                         width: double.infinity,
                         height: 56,
                         child: Center(
-                          child: Text(
-                            "Add Task",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: GoogleFonts.poppins().fontFamily,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 15),
-                    FilledButton(
-                      onPressed: () {
-                        taskProvider.deleteAllTasks();
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(
-                          Colors.redAccent.shade400,
-                        ),
-                      ),
-                      child: SizedBox(
-                        width: double.infinity,
-                        height: 56,
-                        child: Center(
-                          child: Text(
-                            "Delete All Tasks",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: GoogleFonts.poppins().fontFamily,
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              HugeIcon(
+                                size: 22,
+                                strokeWidth: 2,
+                                icon: HugeIcons.strokeRoundedTaskAdd02,
+                              ),
+                              SizedBox(width: 6),
+                              Text(
+                                "Add Task",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: GoogleFonts.poppins().fontFamily,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),

@@ -18,6 +18,11 @@ class TaskProvider extends ChangeNotifier {
     _saveTasks();
   }
 
+  // Fetch All Tasks
+  (List<String>, List<String>) fetchAllTasks() {
+    return (_tasks, _completed);
+  }
+
   // Delete All Tasks
   void deleteAllTasks() {
     _tasks.clear();

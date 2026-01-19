@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:todo_app/utils/routes.dart';
 import 'package:todo_app/widgets/banner_ads_widget.dart';
+import 'package:todo_app/widgets/todo_body.dart';
 import 'package:todo_app/widgets/ui/toggle_theme_button.dart';
 
 class Home extends StatelessWidget {
@@ -17,7 +18,7 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             Header(title: title),
-            Expanded(flex: 1, child: Container()),
+            Expanded(flex: 1, child: TodoBody()),
             BannerAdsWidget(),
           ],
         ),

@@ -3,7 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const AppbarWidget({super.key, required this.title});
+  final Widget? actionIcon;
+  final VoidCallback? actionFunction;
+  const AppbarWidget({
+    super.key,
+    required this.title,
+    this.actionIcon,
+    this.actionFunction,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +22,10 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
           fontFamily: GoogleFonts.poppins().fontFamily,
         ),
       ),
+      actions: [
+        if (actionFunction != null && actionIcon != null)
+          IconButton(onPressed: actionFunction, icon: actionIcon!),
+      ],
       centerTitle: true,
     );
   }
