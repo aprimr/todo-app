@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/provider/task_provider.dart';
+import 'package:todo_app/screens/about.dart';
 import 'package:todo_app/screens/add_task.dart';
 import 'package:todo_app/screens/edit_task.dart';
 import 'package:todo_app/screens/home.dart';
+import 'package:todo_app/screens/setting.dart';
 import 'package:todo_app/screens/task_detail.dart';
 import 'package:todo_app/theme/theme.dart';
 import 'package:todo_app/theme/theme_provider.dart';
@@ -40,10 +42,12 @@ class TodoApp extends StatelessWidget {
       darkTheme: darkTheme,
       themeMode: themeData.isDark ? ThemeMode.dark : ThemeMode.light,
       routes: {
-        AppRoutes.taskzzRoute: (context) => Home(title: "Taskzz"),
+        AppRoutes.taskzzRoute: (context) => Home(title: title),
         AppRoutes.addTasksRoute: (context) => AddTask(),
         AppRoutes.taskDetailRoute: (context) => TaskDetail(),
         AppRoutes.editTaskRoute: (context) => EditTask(),
+        AppRoutes.settingRoute: (context) => Setting(appName: title),
+        AppRoutes.aboutRoute: (context) => About(appName: title),
       },
     );
   }

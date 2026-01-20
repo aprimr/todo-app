@@ -3,4 +3,6 @@ class AppRoutes {
   static String addTasksRoute = "/add-task";
   static String taskDetailRoute = "/task-detail";
   static String editTaskRoute = "/edit-task";
+  static String settingRoute = "/setting";
+  static String aboutRoute = "/about";
 }

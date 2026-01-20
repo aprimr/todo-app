@@ -4,6 +4,7 @@ import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/helper/snackbar.dart';
 import 'package:todo_app/provider/task_provider.dart';
+import 'package:todo_app/utils/routes.dart';
 import 'package:todo_app/widgets/appbar_widget.dart';
 import 'package:todo_app/widgets/banner_ads_widget.dart';
 
@@ -44,12 +45,12 @@ class _AddTaskState extends State<AddTask> {
       appBar: AppbarWidget(
         title: "Add Task",
         actionIcon: HugeIcon(
-          icon: HugeIcons.strokeRoundedDelete03,
-          color: Theme.of(context).colorScheme.error,
+          icon: HugeIcons.strokeRoundedSettings01,
+          strokeWidth: 2,
+          color: Theme.of(context).colorScheme.secondary,
         ),
         actionFunction: () {
-          taskProvider.deleteAllTasks();
-          showSnackBar(context, message: "Deleted All Tasks");
+          Navigator.pushNamed(context, AppRoutes.settingRoute);
         },
       ),
       body: Column(

@@ -100,6 +100,45 @@ class TaskBody extends StatelessWidget {
                       color: Theme.of(context).colorScheme.tertiary,
                     ),
                   ),
+                  SizedBox(height: 100),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          HugeIcon(
+                            size: 18,
+                            strokeWidth: 2.5,
+                            color: Theme.of(context).colorScheme.tertiary,
+                            icon: HugeIcons.strokeRoundedInformationCircle,
+                          ),
+                          SizedBox(width: 4),
+                          Text(
+                            "Tip",
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: GoogleFonts.outfit().fontFamily,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Swipe tasks to left to delete tasks. ",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: GoogleFonts.lexend().fontFamily,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
       ),

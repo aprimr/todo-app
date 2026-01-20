@@ -25,6 +25,8 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         if (actionFunction != null && actionIcon != null)
           IconButton(onPressed: actionFunction, icon: actionIcon!),
+
+        SizedBox(width: 14),
       ],
       centerTitle: true,
     );
