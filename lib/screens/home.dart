@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             Header(title: title),
-            Expanded(flex: 1, child: TaskBody()),
+            TaskBody(),
             BannerAdsWidget(),
           ],
         ),

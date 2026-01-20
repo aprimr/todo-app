@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/provider/task_provider.dart';
+import 'package:todo_app/utils/routes.dart';
 import 'package:todo_app/widgets/appbar_widget.dart';
 import 'package:todo_app/widgets/banner_ads_widget.dart';
 
@@ -21,7 +22,6 @@ class TaskDetail extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            flex: 1,
             child: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.only(
@@ -40,10 +40,9 @@ class TaskDetail extends StatelessWidget {
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                         fontFamily: GoogleFonts.poppins().fontFamily,
-                        overflow: TextOverflow.fade,
                       ),
                     ),
-                    EditTaskButton(),
+                    EditTaskButton(taskId: taskId, task: task),
                   ],
                 ),
               ),
@@ -92,7 +91,9 @@ class Badge extends StatelessWidget {
 }
 
 class EditTaskButton extends StatelessWidget {
-  const EditTaskButton({super.key});
+  final int taskId;
+  final String task;
+  const EditTaskButton({super.key, required this.taskId, required this.task});
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +103,13 @@ class EditTaskButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FilledButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                AppRoutes.editTaskRoute,
+                arguments: {'taskId': taskId, 'task': task},
+              );
+            },
             style: ButtonStyle(
               backgroundColor: WidgetStatePropertyAll(Colors.blue),
             ),
