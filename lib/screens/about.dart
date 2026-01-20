@@ -123,6 +123,28 @@ class About extends StatelessWidget {
                       "Switch between light and dark themes from settings.",
                     ),
                     const SizedBox(height: 32),
+                    Divider(color: theme.colorScheme.tertiary, thickness: 1),
+                    const SizedBox(height: 20),
+                    Text(
+                      "Privacy Policy",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: GoogleFonts.poppins().fontFamily,
+                        color: theme.colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    __privacyPolicy(
+                      '$appName does not collect or store any personal information from users.',
+                    ),
+                    __privacyPolicy(
+                      'Google AdMob may display ads in the app and collect anonymous usage data.',
+                    ),
+                    __privacyPolicy(
+                      'For more information, see Google’s Privacy & Terms: https://policies.google.com/technologies/ads',
+                    ),
+                    const SizedBox(height: 32),
                   ],
                 ),
               ),
@@ -191,6 +213,20 @@ Widget _howToItem(String text) {
           ),
         ),
       ],
+    ),
+  );
+}
+
+Widget __privacyPolicy(String text) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 8),
+    child: Text(
+      text,
+      style: TextStyle(
+        fontSize: 18,
+        height: 1.5,
+        fontFamily: GoogleFonts.onest().fontFamily,
+      ),
     ),
   );
 }
