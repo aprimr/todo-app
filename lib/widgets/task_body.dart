@@ -21,7 +21,9 @@ class TaskBody extends StatelessWidget {
                   return Dismissible(
                     key: Key(tasks[index]),
                     direction: DismissDirection.endToStart,
-                    onDismissed: (direction) {},
+                    onDismissed: (direction) {
+                      context.read<TaskProvider>().deleteTaskByID(index);
+                    },
                     background: Container(
                       margin: EdgeInsets.symmetric(horizontal: 50),
                       child: Row(
