@@ -18,11 +18,17 @@ class TaskProvider extends ChangeNotifier {
     _saveTasks();
   }
 
+  // Fetch Task By Id
+  (String, String) fetchTaskById(int index) {
+    return (_tasks[index], _completed[index]);
+  }
+
   // Fetch All Tasks
   (List<String>, List<String>) fetchAllTasks() {
     return (_tasks, _completed);
   }
 
+  //  Delete Task By Id
   void deleteTaskByID(int index) {
     _tasks.removeAt(index);
     _completed.removeAt(index);

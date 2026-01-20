@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/provider/task_provider.dart';
 import 'package:todo_app/screens/add_task.dart';
 import 'package:todo_app/screens/home.dart';
+import 'package:todo_app/screens/task_detail.dart';
 import 'package:todo_app/theme/theme.dart';
 import 'package:todo_app/theme/theme_provider.dart';
 import 'package:todo_app/utils/routes.dart';
@@ -40,6 +41,7 @@ class TodoApp extends StatelessWidget {
       routes: {
         AppRoutes.taskzzRoute: (context) => Home(title: "Taskzz"),
         AppRoutes.addTasksRoute: (context) => AddTask(),
+        AppRoutes.taskDetailRoute: (context) => TaskDetail(),
       },
     );
   }

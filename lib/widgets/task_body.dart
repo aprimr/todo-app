@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/provider/task_provider.dart';
+import 'package:todo_app/utils/routes.dart';
 
 class TaskBody extends StatelessWidget {
   const TaskBody({super.key});
@@ -37,31 +38,42 @@ class TaskBody extends StatelessWidget {
                         ],
                       ),
                     ),
-                    child: Card(
-                      elevation: 0.5,
-                      color: completed[index] == "false"
-                          ? Theme.of(context).colorScheme.errorContainer
-                          : Theme.of(context).colorScheme.surfaceTint,
-                      child: ListTile(
-                        leading: IconButton(
-                          onPressed: () {
-                            taskProvider.toggleCompleted(index);
-                          },
-                          icon: HugeIcon(
-                            icon: completed[index] == "false"
-                                ? HugeIcons.strokeRoundedTaskRemove02
-                                : HugeIcons.strokeRoundedTaskDone02,
-                            color: completed[index] == "false"
-                                ? Theme.of(context).colorScheme.error
-                                : Theme.of(context).colorScheme.outline,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.taskDetailRoute,
+                          arguments: {'taskId': index},
+                        );
+                      },
+                      child: Card(
+                        elevation: 0.5,
+                        color: completed[index] == "false"
+                            ? Theme.of(context).colorScheme.errorContainer
+                            : Theme.of(context).colorScheme.surfaceTint,
+                        child: ListTile(
+                          leading: IconButton(
+                            onPressed: () {
+                              taskProvider.toggleCompleted(index);
+                            },
+                            icon: HugeIcon(
+                              icon: completed[index] == "false"
+                                  ? HugeIcons.strokeRoundedTaskRemove02
+                                  : HugeIcons.strokeRoundedTaskDone02,
+                              color: completed[index] == "false"
+                                  ? Theme.of(context).colorScheme.error
+                                  : Theme.of(context).colorScheme.outline,
+                            ),
                           ),
-                        ),
-                        title: Text(
-                          tasks[index],
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: GoogleFonts.poppins().fontFamily,
-                            color: Theme.of(context).colorScheme.secondary,
+                          title: Text(
+                            tasks[index],
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: GoogleFonts.poppins().fontFamily,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
                           ),
                         ),
                       ),
